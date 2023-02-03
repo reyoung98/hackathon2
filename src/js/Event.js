@@ -21,7 +21,7 @@ export default class Event {
         <p class="event__date">${this.date}</p>
         <img
           class="event__image"
-          src="${this.image_url}"
+          src="${this.imageUrl}"
           alt="image"
         />
         <p class="description">${this.description}</p>
