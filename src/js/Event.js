@@ -1,23 +1,23 @@
 export default class Event {
-  constructor(properties) {
-    this.id = properties.id;
-    this.name = properties.name;
-    this.date = properties.date;
-    this.description = properties.description;
-    this.imageUrl = properties.image_url;
-    this.event = document.createElement("div");
-    this.event.classList.add("event");
-    this.modal = document.createElement("div");
-    this.modal.classList.add("modal");
+    constructor(properties) {
+        this.id = properties.id;
+        this.name = properties.name;
+        this.date = properties.date;
+        this.description = properties.description;
+        this.imageUrl = properties.image_url;
+        this.event = document.createElement("div");
+        this.event.classList.add("event");
+        this.modal = document.createElement("div");
+        this.modal.classList.add("modal");
 
-    this.createEvent();
-    this.createModal();
-    this.openModal();
-    this.closeModal();
-  }
+        this.createEvent();
+        // this.createModal();
+        this.openModal();
+        this.closeModal();
+    }
 
-  createModal = () => {
-    this.modal.innerHTML = `
+    createModal = () => {
+        this.modal.innerHTML = `
         <div class="modal-info">
         <h2 class="event__name">${this.name}</h2>
         <p class="event__date">${this.date}</p>
@@ -59,22 +59,26 @@ export default class Event {
         </div>
        
         `;
-    const section = document.querySelector("section");
-    section.appendChild(this.modal);
 
-    const forms= document.querySelectorAll('form');
-    for (let form of forms) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.sendData();
-            console.log("sending data!")
-        });
-    }
-    
-  };
+        const section = document.querySelector("section");
+        section.appendChild(this.modal);
 
-  createEvent = () => {
-    this.event.innerHTML = `
+        const xBtn = this.modal.querySelector(".x-btn");
+        console.log(xBtn)
+        xBtn.addEventListener('click', this.closeModal)
+
+        const form = this.modal.querySelector('form');
+            console.log(form);
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.sendData(form);
+                console.log("sending data!")
+            });
+
+    };
+
+    createEvent = () => {
+        this.event.innerHTML = `
        
         <img
           class="event-img"
@@ -89,53 +93,61 @@ export default class Event {
               <button class="more-btn">More</button>
         </div>
         `;
-    const main = document.querySelector("main");
-    main.appendChild(this.event);
-  };
-
-  openModal = () => {
-
-    const moreBtns = document.querySelectorAll(".more-btn");
-
-    for (let i = 0; i < moreBtns.length; i++) {
-        moreBtns[i].addEventListener("click", () => {
-          if (i + 7 === this.id) {
-            this.modal.classList.add("modal-visible");
-          }
-        });
-      }
-  }
-
-  closeModal = () => {
-
-    const xBtns = document.querySelectorAll(".x-btn");
-
-    for (let i = 0; i < xBtns.length; i++) {
-        xBtns[i].addEventListener("click", () => {
-            console.log(this.modal);
-            this.modal.classList.remove("modal-visible");
-        });
-      }
-  }
-
-  sendData = async () => {
-    const url = `https://test-api.codingbootcamp.cz/api/532f6503/events/${this.id}/registrations`;
-    const dataObject = {
-        // data here
-
+        const main = document.querySelector("main");
+        main.appendChild(this.event);
     };
 
-    const postResponse = await fetch(url, {
-        "method": "POST",
-        "body": JSON.stringify(dataObject),
-        "headers": {
-            'Content-Type': 'application/json'
+    openModal = () => {
+
+        const moreBtns = document.querySelectorAll(".more-btn");
+
+        for (let i = 0; i < moreBtns.length; i++) {
+            moreBtns[i].addEventListener("click", () => {
+                if (i + 7 === this.id) {
+                    this.modal.classList.add("modal-visible");
+                    this.createModal()
+                }
+            });
         }
-    })
+    }
 
-    const postReadableResponse = await postResponse.json()
+    closeModal = () => {
+        // const section = document.querySelector('section');
+        // console.log(section)
+        // section.removeChild(this.modal);
+        this.modal.classList.remove("modal-visible");
 
-    console.log(postReadableResponse);
-  }
+    }
+
+    sendData = async (form) => {
+
+        const nameValue = form.querySelector('#first_name').value;
+        console.log(nameValue);
+        const lastName = form.querySelector('#last_name').value;
+        const emailValue = form.querySelector('#email').value;
+        const phoneValue = form.querySelector('#phone').value;
+        // const lastName = form.querySelector('#last_name').value;
+
+        const url = `https://test-api.codingbootcamp.cz/api/532f6503/events/${this.id}/registrations`;
+        const dataObject = {
+            "name": nameValue,
+            "surname": lastName,
+            "email": emailValue,
+            "phone": phoneValue
+
+        };
+
+        const postResponse = await fetch(url, {
+            "method": "POST",
+            "body": JSON.stringify(dataObject),
+            "headers": {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const postReadableResponse = await postResponse.json()
+
+        console.log(postReadableResponse);
+    }
 
 }
