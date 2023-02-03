@@ -22,7 +22,7 @@ export default class Event {
         <h2 class="event__name">${this.name}</h2>
         <p class="event__date">${this.date}</p>
         <img
-          class="event__image"
+          class="modal-image"
           src="${this.imageUrl}"
           alt="image"
         />

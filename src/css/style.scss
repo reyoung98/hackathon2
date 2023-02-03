@@ -91,11 +91,13 @@ section {
 .modal {
   display: none;
   width: 80%;
-  border: 1px solid black;
+  box-shadow: 0 1px 5px rgba(0,0,0,.2)
+  
 }
 
 .modal-visible {
   display: flex;
+  justify-content: space-between;
 }
 
 .modal .modal-info {
@@ -103,6 +105,19 @@ section {
   flex-direction: column;
   width: 45%;
   margin-left: 50px;
+}
+
+.x-btn {
+  border: 0;
+  padding: 1rem;
+
+  &:hover {
+    background-color: pink;
+  }
+}
+
+.modal-image {
+  max-width: 400px;
 }
 
 .modal .modal-form {
