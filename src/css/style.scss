@@ -1,0 +1,14 @@
+main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.event {
+  max-width: 28%;
+  margin: 2rem;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.event-img {
+  width: 100%;
+}
