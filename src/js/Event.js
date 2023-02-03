@@ -1,21 +1,21 @@
 export default class Event {
-    constructor(properties) {
-        this.id = properties.id;
-        this.name = properties.name;
-        this.date = properties.date;
-        this.description = properties.description;
-        this.imageUrl = properties.image_url;
-        this.event = document.createElement('div');
-        this.event.classList.add("event");
-        this.modal = document.createElement('div');
-        this.modal.classList.add("modal");
+  constructor(properties) {
+    this.id = properties.id;
+    this.name = properties.name;
+    this.date = properties.date;
+    this.description = properties.description;
+    this.imageUrl = properties.image_url;
+    this.event = document.createElement("div");
+    this.event.classList.add("event");
+    this.modal = document.createElement("div");
+    this.modal.classList.add("modal");
 
-        this.createEvent();
-        this.createModal();
-    }
+    this.createEvent();
+    this.createModal();
+  }
 
-    createModal = () => {
-        this.modal.innerHTML = `
+  createModal = () => {
+    this.modal.innerHTML = `
         <div class="modal-info">
         <h2 class="event__name">${this.name}</h2>
         <p class="event__date">${this.date}</p>
@@ -48,16 +48,21 @@ export default class Event {
 
           <label for="age_check">I am over 18 </label>
           <input type="checkbox" name="age_check" id="age_check" />
+          <button type="submit" >Send</button>
         </form>
       </div>
+      <div class="x-section">
+            <button class="x-btn">X</button>
+          </div>
+        </div>
        
-        `
-        const section = document.querySelector('section');
-        section.appendChild(this.modal)
-    }
+        `;
+    const section = document.querySelector("section");
+    section.appendChild(this.modal);
+  };
 
-    createEvent = () => {
-        this.event.innerHTML = `
+  createEvent = () => {
+    this.event.innerHTML = `
        
         <img
           class="event-img"
@@ -71,21 +76,19 @@ export default class Event {
               <p class="event-date">${this.date}</p>
               <button class="more-btn">More</button>
         </div>
-        `
-        const main = document.querySelector('main');
-        main.appendChild(this.event)
+        `;
+    const main = document.querySelector("main");
+    main.appendChild(this.event);
 
-        const moreBtns = document.querySelectorAll('.more-btn');
+    const moreBtns = document.querySelectorAll(".more-btn");
 
-        for (let i=0; i<moreBtns.length; i++) {
-            moreBtns[i].addEventListener('click', () => {
-                if (i + 1 === this.id) {
-                console.log(this.modal)
-                this.modal.classList.add("modal-visible")
-                }
-            })
+    for (let i = 0; i < moreBtns.length; i++) {
+      moreBtns[i].addEventListener("click", () => {
+        if (i + 1 === this.id) {
+          console.log(this.modal);
+          this.modal.classList.add("modal-visible");
         }
-        
+      });
     }
-
+  };
 }
