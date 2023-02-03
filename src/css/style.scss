@@ -78,6 +78,7 @@ body {
 section {
   position: absolute;
   background-color: white;
+  width: 60%;
   // display: flex;
   // justify-content: center;
   // align-items: center;
@@ -85,8 +86,14 @@ section {
 
 .modal {
   display: none;
+<<<<<<< HEAD
   width: 80%;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+=======
+  // width: 80%;
+  box-shadow: 0 1px 5px rgba(0,0,0,.2)
+  
+>>>>>>> 215002979a883fda5fff72f4c13e79aba8380ae2
 }
 
 .modal-visible {
