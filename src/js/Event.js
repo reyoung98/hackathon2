@@ -1,23 +1,23 @@
 export default class Event {
-    constructor(properties) {
-        this.id = properties.id;
-        this.name = properties.name;
-        this.date = properties.date;
-        this.description = properties.description;
-        this.imageUrl = properties.image_url;
-        this.event = document.createElement("div");
-        this.event.classList.add("event");
-        this.modal = document.createElement("div");
-        this.modal.classList.add("modal");
+  constructor(properties) {
+    this.id = properties.id;
+    this.name = properties.name;
+    this.date = properties.date;
+    this.description = properties.description;
+    this.imageUrl = properties.image_url;
+    this.event = document.createElement("div");
+    this.event.classList.add("event");
+    this.modal = document.createElement("div");
+    this.modal.classList.add("modal");
 
-        this.createEvent();
-        // this.createModal();
-        this.openModal();
-        this.closeModal();
-    }
+    this.createEvent();
+    // this.createModal();
+    this.openModal();
+    this.closeModal();
+  }
 
-    createModal = () => {
-        this.modal.innerHTML = `
+  createModal = () => {
+    this.modal.innerHTML = `
         <div class="modal-info">
         <h2 class="event__name">${this.name}</h2>
         <p class="event__date">${this.date}</p>
@@ -35,21 +35,23 @@ export default class Event {
           method="POST"
           action="https://test-api.codingbootcamp.cz/api/532f6503/events/${this.id}/registrations"
         >
-          <label for="first_name">Name:</label> <br />
+          <label for="first_name">Name*</label> <br />
           <input type="text" name="first_name" id="first_name" /> <br />
 
-          <label for="last_name">Surname:</label> <br />
+          <label for="last_name">Surname*</label> <br />
           <input type="text" name="last_name" id="last_name" />
 
-          <label for="email">Email:</label> <br />
+          <label for="email">Email*</label> <br />
           <br />
           <input type="email" name="email" id="email"/> <br />
 
           <label for="phone">Phone Number:</label> <br />
           <input type="tel" name="phone" id="phone"/> <br />
 
+          <div class="check">
           <label for="age_check">I am over 18 </label>
           <input type="checkbox" name="age_check" id="age_check"/>
+          </div>
           <button type="submit" >Send</button>
         </form>
       </div>
@@ -60,25 +62,24 @@ export default class Event {
        
         `;
 
-        const section = document.querySelector("section");
-        section.appendChild(this.modal);
+    const section = document.querySelector("section");
+    section.appendChild(this.modal);
 
-        const xBtn = this.modal.querySelector(".x-btn");
-        console.log(xBtn)
-        xBtn.addEventListener('click', this.closeModal)
+    const xBtn = this.modal.querySelector(".x-btn");
+    console.log(xBtn);
+    xBtn.addEventListener("click", this.closeModal);
 
-        const form = this.modal.querySelector('form');
-            console.log(form);
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.sendData(form);
-                console.log("sending data!")
-            });
+    const form = this.modal.querySelector("form");
+    console.log(form);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this.sendData(form);
+      console.log("sending data!");
+    });
+  };
 
-    };
-
-    createEvent = () => {
-        this.event.innerHTML = `
+  createEvent = () => {
+    this.event.innerHTML = `
        
         <img
           class="event-img"
@@ -93,61 +94,56 @@ export default class Event {
               <button class="more-btn">More</button>
         </div>
         `;
-        const main = document.querySelector("main");
-        main.appendChild(this.event);
+    const main = document.querySelector("main");
+    main.appendChild(this.event);
+  };
+
+  openModal = () => {
+    const moreBtns = document.querySelectorAll(".more-btn");
+
+    for (let i = 0; i < moreBtns.length; i++) {
+      moreBtns[i].addEventListener("click", () => {
+        if (i + 7 === this.id) {
+          this.modal.classList.add("modal-visible");
+          this.createModal();
+        }
+      });
+    }
+  };
+
+  closeModal = () => {
+    // const section = document.querySelector('section');
+    // console.log(section)
+    // section.removeChild(this.modal);
+    this.modal.classList.remove("modal-visible");
+  };
+
+  sendData = async (form) => {
+    const nameValue = form.querySelector("#first_name").value;
+    console.log(nameValue);
+    const lastName = form.querySelector("#last_name").value;
+    const emailValue = form.querySelector("#email").value;
+    const phoneValue = form.querySelector("#phone").value;
+    // const lastName = form.querySelector('#last_name').value;
+
+    const url = `https://test-api.codingbootcamp.cz/api/532f6503/events/${this.id}/registrations`;
+    const dataObject = {
+      name: nameValue,
+      surname: lastName,
+      email: emailValue,
+      phone: phoneValue,
     };
 
-    openModal = () => {
+    const postResponse = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(dataObject),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-        const moreBtns = document.querySelectorAll(".more-btn");
+    const postReadableResponse = await postResponse.json();
 
-        for (let i = 0; i < moreBtns.length; i++) {
-            moreBtns[i].addEventListener("click", () => {
-                if (i + 7 === this.id) {
-                    this.modal.classList.add("modal-visible");
-                    this.createModal()
-                }
-            });
-        }
-    }
-
-    closeModal = () => {
-        // const section = document.querySelector('section');
-        // console.log(section)
-        // section.removeChild(this.modal);
-        this.modal.classList.remove("modal-visible");
-
-    }
-
-    sendData = async (form) => {
-
-        const nameValue = form.querySelector('#first_name').value;
-        console.log(nameValue);
-        const lastName = form.querySelector('#last_name').value;
-        const emailValue = form.querySelector('#email').value;
-        const phoneValue = form.querySelector('#phone').value;
-        // const lastName = form.querySelector('#last_name').value;
-
-        const url = `https://test-api.codingbootcamp.cz/api/532f6503/events/${this.id}/registrations`;
-        const dataObject = {
-            "name": nameValue,
-            "surname": lastName,
-            "email": emailValue,
-            "phone": phoneValue
-
-        };
-
-        const postResponse = await fetch(url, {
-            "method": "POST",
-            "body": JSON.stringify(dataObject),
-            "headers": {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        const postReadableResponse = await postResponse.json()
-
-        console.log(postReadableResponse);
-    }
-
+    console.log(postReadableResponse);
+  };
 }
