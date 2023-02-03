@@ -12,6 +12,8 @@ export default class Event {
 
     this.createEvent();
     this.createModal();
+    this.openModal();
+    this.closeModal();
   }
 
   createModal = () => {
@@ -79,16 +81,42 @@ export default class Event {
         `;
     const main = document.querySelector("main");
     main.appendChild(this.event);
+  };
+
+  openModal = () => {
 
     const moreBtns = document.querySelectorAll(".more-btn");
 
     for (let i = 0; i < moreBtns.length; i++) {
-      moreBtns[i].addEventListener("click", () => {
-        if (i + 1 === this.id) {
-          console.log(this.modal);
-          this.modal.classList.add("modal-visible");
-        }
-      });
-    }
-  };
+        moreBtns[i].addEventListener("click", () => {
+          if (i + 1 === this.id) {
+            this.modal.classList.add("modal-visible");
+          }
+        });
+      }
+  }
+
+  closeModal = () => {
+
+    const xBtns = document.querySelectorAll(".x-btn");
+
+    for (let i = 0; i < xBtns.length; i++) {
+        xBtns[i].addEventListener("click", () => {
+            console.log(this.modal);
+            this.modal.classList.remove("modal-visible");
+        });
+      }
+  }
+
+  sendData = () => {
+    const submitBtns = document.querySelectorAll('button[type="submit"]')
+    console.log(submitBtns)
+
+    for (let i = 0; i < submitBtns.length; i++) {
+        submitBtns[i].addEventListener("click", () => {
+          console.log('hi')
+        });
+      }
+  }
+
 }
