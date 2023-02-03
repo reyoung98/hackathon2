@@ -43,13 +43,13 @@ export default class Event {
 
           <label for="email">Email:</label> <br />
           <br />
-          <input type="email" name="email" id="email" /> <br />
+          <input type="email" name="email" id="email"/> <br />
 
           <label for="phone">Phone Number:</label> <br />
-          <input type="tel" name="phone" id="phone" /> <br />
+          <input type="tel" name="phone" id="phone"/> <br />
 
           <label for="age_check">I am over 18 </label>
-          <input type="checkbox" name="age_check" id="age_check" />
+          <input type="checkbox" name="age_check" id="age_check"/>
           <button type="submit" >Send</button>
         </form>
       </div>
@@ -61,6 +61,16 @@ export default class Event {
         `;
     const section = document.querySelector("section");
     section.appendChild(this.modal);
+
+    const forms= document.querySelectorAll('form');
+    for (let form of forms) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.sendData();
+            console.log("sending data!")
+        });
+    }
+    
   };
 
   createEvent = () => {
@@ -89,7 +99,7 @@ export default class Event {
 
     for (let i = 0; i < moreBtns.length; i++) {
         moreBtns[i].addEventListener("click", () => {
-          if (i + 1 === this.id) {
+          if (i + 7 === this.id) {
             this.modal.classList.add("modal-visible");
           }
         });
@@ -108,15 +118,24 @@ export default class Event {
       }
   }
 
-  sendData = () => {
-    const submitBtns = document.querySelectorAll('button[type="submit"]')
-    console.log(submitBtns)
+  sendData = async () => {
+    const url = `https://test-api.codingbootcamp.cz/api/532f6503/events/${this.id}/registrations`;
+    const dataObject = {
+        // data here
 
-    for (let i = 0; i < submitBtns.length; i++) {
-        submitBtns[i].addEventListener("click", () => {
-          console.log('hi')
-        });
-      }
+    };
+
+    const postResponse = await fetch(url, {
+        "method": "POST",
+        "body": JSON.stringify(dataObject),
+        "headers": {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    const postReadableResponse = await postResponse.json()
+
+    console.log(postReadableResponse);
   }
 
 }
