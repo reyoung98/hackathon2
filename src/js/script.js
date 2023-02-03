@@ -1,4 +1,5 @@
 import Event from './Event';
+// import Modal from './Modal'
 
 const events = [
     {
@@ -47,5 +48,6 @@ const events = [
 
   for (let event of events) {
       const eventCard = new Event(event);
+    //   const newModal = new Modal(event);
   }
 
