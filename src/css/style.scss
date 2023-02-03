@@ -12,3 +12,53 @@ main {
 .event-img {
   width: 100%;
 }
+
+body {
+  position: relative;
+}
+
+section {
+  position: absolute;
+  background-color: white;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+}
+
+.modal {
+  display: flex;
+  width: 80%;
+  border: 1px solid black;
+}
+
+.modal .modal-info {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  margin-left: 50px;
+}
+
+.modal .modal-form {
+  display: flex;
+  flex-direction: column;
+  // flex-wrap: wrap;
+  flex-direction: column;
+  margin: 0 50px;
+}
+
+form {
+  margin-top: 2.5rem;
+}
+
+label,
+input {
+  width: 80%;
+}
+
+label {
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid black;
+}

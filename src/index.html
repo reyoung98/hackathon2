@@ -16,40 +16,45 @@
     </nav>
 
     <main>
+      <section>
         <div class="modal">
+          <div class="modal-info">
+            <h2 class="event__name">Name</h2>
+            <p class="event__date">12/12/2202</p>
+            <img
+              class="event__image"
+              src="https://www.praguest.com/images/sampledata/sports/iceskating/ovocnytrh/estate-theatre.jpg"
+              alt="image"
+            />
+            <p class="description"></p>
+          </div>
 
-            <div class="modal-info">
-                <h2 class="event__name">Name</h2>
-                <p class="event__date">12/12/2202</p>
-                <img class="event__image" src="https://www.praguest.com/images/sampledata/sports/iceskating/ovocnytrh/estate-theatre.jpg" alt="image">
-                <p class="description"></p>
-            </div>
+          <div class="modal-form">
+            <h2>Register!</h2>
+            <form
+              method="POST"
+              action="https://test-api.codingbootcamp.cz/api/532f6503/events/EVENT_ID/registrations"
+            >
+              <label for="first_name">Name:</label> <br />
+              <input type="text" name="first_name" id="first_name" /> <br />
 
-            <div class="modal-form">
-                <form method="POST" action="https://test-api.codingbootcamp.cz/api/532f6503/events/EVENT_ID/registrations">
+              <label for="last_name">Surname:</label> <br />
+              <input type="text" name="last_name" id="last_name" />
 
-                    <label for="first_name">Name</label>
-                    <input type="text" name="first_name" id="first_name">
+              <label for="email">Email:</label> <br />
+              <br />
+              <input type="email" name="email" id="email" /> <br />
 
-                    <label for="last_name">Surname</label>
-                    <input type="text" name="last_name" id="last_name">
+              <label for="phone">Phone Number:</label> <br />
+              <input type="tel" name="phone" id="phone" /> <br />
 
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email">
-
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" name="phone" id="phone">
-
-                    <label for="age_check">I am over 18</label>
-                    <input type="checkbox" name="age_check" id="age_check">
-                    
-                </form>
-            </div>
-
+              <label for="age_check">I am over 18 </label>
+              <input type="checkbox" name="age_check" id="age_check" />
+            </form>
+          </div>
         </div>
+      </section>
     </main>
-
-
 
     <script src="js/script.js"></script>
   </body>
