@@ -50,31 +50,5 @@ const events = [
       const eventCard = new Event(event);
   }
 
-  const sendData = async () => {
-    try {
-        const url = `https://test-api.codingbootcamp.cz/api/532f6503/events/${this.id}/registrations`
-        const response = await fetch(url, {
-            "method": "POST",
-            "body": JSON.stringify(
-                {
-                  // data
-                }
-            ),
-            "headers": {
-                'Content-Type': 'application/json'
-            }
-        });
-        console.log(response);
-        const data = await response.json()
-        console.log(data);
-    }
-    catch (err) {
-        console.log("Error!", err)
-    }
-    finally {
-        console.log("All done!")
-    }
-}
-
 
 
