@@ -22,8 +22,8 @@ export default class Event {
           <h2 class="event-name">
             ${this.name}
           </h2>
-          <p class="event-date">${this.date}</p>
-          <button class="more-btn">More</button>
+              <p class="event-date">${this.date}</p>
+              <button class="more-btn">More</button>
         </div>
         `
         const main = document.querySelector('main');

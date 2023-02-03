@@ -1,9 +1,28 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+body { 
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
 main {
   display: flex;
   flex-wrap: wrap;
 }
 
 .event {
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-around;
   max-width: 28%;
   margin: 2rem;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
@@ -11,4 +30,45 @@ main {
 
 .event-img {
   width: 100%;
+  top: 0;
+  }
+
+  .event-name {
+    margin-bottom: 0;
+  }
+
+  
+.event-info {
+  padding: 1rem;
 }
+
+.event-date {
+  margin: 0;
+}
+
+.more-btn {
+  margin: 1rem;
+  padding: 1rem 5rem;
+  width: 90%;
+  border: 0;
+}
+
+
+
+nav {
+  display: flex;
+  background-color: #2e3440;
+  padding: 0 1rem;
+
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+  }
+
+  .home {
+    margin-left: auto;
+  }
+}
+
+
